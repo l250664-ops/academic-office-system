@@ -124,12 +124,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\AcademicEntity.cpp" />
+    <ClCompile Include="..\..\src\Assessment.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Student.cpp" />
     <ClCompile Include="..\..\src\Teacher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\AcademicEntity.h" />
+    <ClInclude Include="..\..\include\Assessment.h" />
     <ClInclude Include="..\..\include\Student.h" />
     <ClInclude Include="..\..\include\Teacher.h" />
   </ItemGroup>
