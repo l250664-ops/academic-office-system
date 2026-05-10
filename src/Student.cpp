@@ -67,7 +67,10 @@ string RegularStudent::getStudentType() const {
     return "Regular";
 }
 
-ScholarshipStudent::ScholarshipStudent(string id, string n, string e, float g, float minG) : Student(id, n, e), gpa(g), minGPA(minG), status("Good Standing") {
+ScholarshipStudent::ScholarshipStudent(string id, string n, string e, float g, float minG)
+    : Student(id, n, e), gpa(g), minGPA(minG), status("Good Standing") {
+        if (gpa < minGPA)
+        status = "Probation";
 }
 
 float ScholarshipStudent::calculateGPA() const {
