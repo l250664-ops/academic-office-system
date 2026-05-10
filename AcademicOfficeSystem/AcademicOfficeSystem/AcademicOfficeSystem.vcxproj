@@ -129,6 +129,7 @@
     <ClCompile Include="..\..\src\Course.cpp" />
     <ClCompile Include="..\..\src\Student.cpp" />
     <ClCompile Include="..\..\src\Teacher.cpp" />
+    <ClCompile Include="..\..\src\Venue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\AcademicEntity.h" />
@@ -136,6 +137,7 @@
     <ClInclude Include="..\..\include\Course.h" />
     <ClInclude Include="..\..\include\Student.h" />
     <ClInclude Include="..\..\include\Teacher.h" />
+    <ClInclude Include="..\..\include\Venue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
