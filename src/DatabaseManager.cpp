@@ -53,3 +53,37 @@ void DatabaseManager::loadStudents(Student* students[], int& count) {
     }
     file.close();
 }
+// ---- TEACHER ----
+void DatabaseManager::saveTeacher(Teacher* t) {
+    ofstream file(teachersFile, ios::app);
+    if (!file) { cout << "Error opening teachers file." << endl; return; }
+    file << t->getID() << " | " << t->getName() << " | "
+        << t->getEmail() << " | " << t->getAverageFeedback() << endl;
+    file.close();
+}
+
+void DatabaseManager::loadTeachers(Teacher* teachers[], int& count) {
+    ifstream file(teachersFile);
+    if (!file) { cout << "No teachers file found." << endl; return; }
+    string line;
+    count = 0;
+    while (getline(file, line) && count < 20) {
+        stringstream ss(line);
+        string id, name, email, feedback;
+        getline(ss, id, '|');
+        getline(ss, name, '|');
+        getline(ss, email, '|');
+        getline(ss, feedback);
+
+        auto trim = [](string s) {
+            while (!s.empty() && s[0] == ' ') s = s.substr(1);
+            while (!s.empty() && s.back() == ' ') s.pop_back();
+            return s;
+            };
+        id = trim(id); name = trim(name);
+        email = trim(email);
+
+        teachers[count++] = new Teacher(id, name, email);
+    }
+    file.close();
+}
