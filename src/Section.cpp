@@ -2,8 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Section::Section(string sid, string cid, string tid, string vid, string slot)
-    : sectionID(sid), courseID(cid), teacherID(tid), venueID(vid), timeSlot(slot) {
+Section::Section(string sid, string cid, string tid, string vid, string slot): sectionID(sid), courseID(cid), teacherID(tid), venueID(vid), timeSlot(slot) {
 }
 
 string Section::getSectionID() const {

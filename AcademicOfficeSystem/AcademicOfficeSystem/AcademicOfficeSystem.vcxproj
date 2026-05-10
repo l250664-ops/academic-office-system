@@ -127,6 +127,7 @@
     <ClCompile Include="..\..\src\Assessment.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Course.cpp" />
+    <ClCompile Include="..\..\src\Section.cpp" />
     <ClCompile Include="..\..\src\Student.cpp" />
     <ClCompile Include="..\..\src\Teacher.cpp" />
     <ClCompile Include="..\..\src\Venue.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="..\..\include\AcademicEntity.h" />
     <ClInclude Include="..\..\include\Assessment.h" />
     <ClInclude Include="..\..\include\Course.h" />
+    <ClInclude Include="..\..\include\Section.h" />
     <ClInclude Include="..\..\include\Student.h" />
     <ClInclude Include="..\..\include\Teacher.h" />
     <ClInclude Include="..\..\include\Venue.h" />
