@@ -337,6 +337,81 @@ void schedulerMenu() {
     } while (choice != 6);
 }
 
+void gradingMenu() {
+    int choice;
+    do {
+        cout << "\n--- Grading ---" << endl;
+        cout << "1. Add Assessment to Course" << endl;
+        cout << "2. Calculate Final Grade" << endl;
+        cout << "3. View Student Transcript" << endl;
+        cout << "4. Back to Main Menu" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            string cid, type;
+            float raw, max, weightage;
+            cout << "Enter Course ID: "; cin >> cid;
+            cout << "Enter Assessment Type (Exam/Quiz/Assignment): "; cin >> type;
+            cout << "Enter Raw Score: "; cin >> raw;
+            cout << "Enter Max Score: "; cin >> max;
+            cout << "Enter Weightage: "; cin >> weightage;
+
+            bool found = false;
+            for (int i = 0; i < courseCount; i++) {
+                if (courses[i]->getCourseID() == cid) {
+                    Assessment* a = nullptr;
+                    if (type == "Exam")
+                        a = new Exam(raw, max, weightage);
+                    else if (type == "Quiz")
+                        a = new Quiz(raw, max, weightage);
+                    else if (type == "Assignment")
+                        a = new Assignment(raw, max, weightage);
+                    else {
+                        cout << "Invalid type!" << endl;
+                        break;
+                    }
+                    courses[i]->addAssessment(a);
+                    cout << "Assessment added successfully!" << endl;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) cout << "Course not found." << endl;
+
+        }
+        else if (choice == 2) {
+            string cid;
+            cout << "Enter Course ID: "; cin >> cid;
+            bool found = false;
+            for (int i = 0; i < courseCount; i++) {
+                if (courses[i]->getCourseID() == cid) {
+                    float grade = courses[i]->calculateFinalGrade();
+                    cout << "Final Grade for " << courses[i]->getTitle()
+                        << ": " << grade << "%" << endl;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) cout << "Course not found." << endl;
+
+        }
+        else if (choice == 3) {
+            string sid;
+            cout << "Enter Student ID: "; cin >> sid;
+            bool found = false;
+            for (int i = 0; i < studentCount; i++) {
+                if (students[i]->getID() == sid) {
+                    students[i]->viewTranscript();
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) cout << "Student not found." << endl;
+        }
+    } while (choice != 4);
+}
+
 int main() {
    
     db.loadStudents(students, studentCount);
@@ -361,7 +436,8 @@ int main() {
             break;
         case 4: schedulerMenu(); 
             break;
-        case 5: cout << "Grading - Coming soon" << endl; break;
+        case 5: gradingMenu(); 
+            break;
         case 6: cout << "Goodbye!" << endl; break;
         default: cout << "Invalid choice. Try again." << endl;
         }
