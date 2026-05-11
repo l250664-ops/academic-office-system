@@ -34,6 +34,75 @@ void showMainMenu() {
     cout << "Enter choice: ";
 }
 
+void studentMenu() {
+    int choice;
+    do {
+        cout << "\n--- Student Management ---" << endl;
+        cout << "1. Add Student" << endl;
+        cout << "2. View All Students" << endl;
+        cout << "3. Search Student by ID" << endl;
+        cout << "4. Back to Main Menu" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            string id, name, email, type;
+            float gpa;
+            cout << "Enter ID: "; cin >> id;
+            cout << "Enter Name: "; cin >> name;
+            cout << "Enter Email: "; cin >> email;
+            cout << "Enter Type (Regular/Scholarship/Exchange): "; cin >> type;
+
+            if (type == "Regular") {
+                cout << "Enter GPA: "; cin >> gpa;
+                students[studentCount] = new RegularStudent(id, name, email, gpa);
+            }
+            else if (type == "Scholarship") {
+                float minGPA;
+                cout << "Enter GPA: "; cin >> gpa;
+                cout << "Enter Minimum GPA: "; cin >> minGPA;
+                students[studentCount] = new ScholarshipStudent(id, name, email, gpa, minGPA);
+            }
+            else if (type == "Exchange") {
+                float score;
+                cout << "Enter Score: "; cin >> score;
+                students[studentCount] = new ExchangeStudent(id, name, email, score);
+            }
+            else {
+                cout << "Invalid type!" << endl;
+                continue;
+            }
+            db.saveStudent(students[studentCount]);
+            studentCount++;
+            cout << "Student added successfully!" << endl;
+
+        }
+        else if (choice == 2) {
+            if (studentCount == 0) {
+                cout << "No students found." << endl;
+            }
+            else {
+                for (int i = 0; i < studentCount; i++) {
+                    students[i]->displayProfile();
+                }
+            }
+        }
+        else if (choice == 3) {
+            string id;
+            cout << "Enter Student ID: "; cin >> id;
+            bool found = false;
+            for (int i = 0; i < studentCount; i++) {
+                if (students[i]->getID() == id) {
+                    students[i]->displayProfile();
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) cout << "Student not found." << endl;
+        }
+    } while (choice != 4);
+}
+
 int main() {
    
     db.loadStudents(students, studentCount);
@@ -50,7 +119,7 @@ int main() {
         cin >> choice;
 
         switch (choice) {
-        case 1: cout << "Student Management - Coming soon" << endl; break;
+        case 1: studentMenu(); break;
         case 2: cout << "Teacher Management - Coming soon" << endl; break;
         case 3: cout << "Course Management - Coming soon" << endl; break;
         case 4: cout << "Scheduling - Coming soon" << endl; break;
