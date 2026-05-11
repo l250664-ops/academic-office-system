@@ -103,6 +103,75 @@ void studentMenu() {
     } while (choice != 4);
 }
 
+void teacherMenu() {
+    int choice;
+    do {
+        cout << "\n--- Teacher Management ---" << endl;
+        cout << "1. Add Teacher" << endl;
+        cout << "2. View All Teachers" << endl;
+        cout << "3. Add Feedback for Teacher" << endl;
+        cout << "4. View Teacher Feedback" << endl;
+        cout << "5. Back to Main Menu" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            string id, name, email;
+            cout << "Enter ID: "; cin >> id;
+            cout << "Enter Name: "; cin >> name;
+            cout << "Enter Email: "; cin >> email;
+            teachers[teacherCount] = new Teacher(id, name, email);
+            db.saveTeacher(teachers[teacherCount]);
+            teacherCount++;
+            cout << "Teacher added successfully!" << endl;
+
+        }
+        else if (choice == 2) {
+            if (teacherCount == 0) {
+                cout << "No teachers found." << endl;
+            }
+            else {
+                for (int i = 0; i < teacherCount; i++) {
+                    teachers[i]->displayProfile();
+                }
+            }
+        }
+        else if (choice == 3) {
+            string id;
+            cout << "Enter Teacher ID: "; cin >> id;
+            bool found = false;
+            for (int i = 0; i < teacherCount; i++) {
+                if (teachers[i]->getID() == id) {
+                    float rating;
+                    string comment;
+                    cout << "Enter Rating (1-5): "; cin >> rating;
+                    cin.ignore();
+                    cout << "Enter Comment: "; getline(cin, comment);
+                    teachers[i]->addFeedback(rating, comment);
+                    cout << "Feedback added!" << endl;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) cout << "Teacher not found." << endl;
+
+        }
+        else if (choice == 4) {
+            string id;
+            cout << "Enter Teacher ID: "; cin >> id;
+            bool found = false;
+            for (int i = 0; i < teacherCount; i++) {
+                if (teachers[i]->getID() == id) {
+                    teachers[i]->displayFeedback();
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) cout << "Teacher not found." << endl;
+        }
+    } while (choice != 5);
+}
+
 int main() {
    
     db.loadStudents(students, studentCount);
@@ -119,8 +188,10 @@ int main() {
         cin >> choice;
 
         switch (choice) {
-        case 1: studentMenu(); break;
-        case 2: cout << "Teacher Management - Coming soon" << endl; break;
+        case 1: studentMenu(); 
+            break;
+        case 2: teacherMenu();
+            break;
         case 3: cout << "Course Management - Coming soon" << endl; break;
         case 4: cout << "Scheduling - Coming soon" << endl; break;
         case 5: cout << "Grading - Coming soon" << endl; break;
