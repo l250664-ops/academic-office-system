@@ -21,23 +21,23 @@ int venueCount = 0, sectionCount = 0;
 DatabaseManager db;
 
 void showMainMenu() {
-    cout << "\n============================" << endl;
+    cout  << endl;
     cout << "  Academic Office System" << endl;
-    cout << "============================" << endl;
+    cout  << endl;
     cout << "1. Student Management" << endl;
     cout << "2. Teacher Management" << endl;
     cout << "3. Course Management" << endl;
     cout << "4. Scheduling" << endl;
     cout << "5. Grading" << endl;
     cout << "6. Exit" << endl;
-    cout << "============================" << endl;
+    cout  << endl;
     cout << "Enter choice: ";
 }
 
 void studentMenu() {
     int choice;
     do {
-        cout << "\n--- Student Management ---" << endl;
+        cout << "\nStudent Management:" << endl<<endl;
         cout << "1. Add Student" << endl;
         cout << "2. View All Students" << endl;
         cout << "3. Search Student by ID" << endl;
@@ -106,7 +106,7 @@ void studentMenu() {
 void teacherMenu() {
     int choice;
     do {
-        cout << "\n--- Teacher Management ---" << endl;
+        cout << "\nTeacher Management:" <<endl<< endl;
         cout << "1. Add Teacher" << endl;
         cout << "2. View All Teachers" << endl;
         cout << "3. Add Feedback for Teacher" << endl;
@@ -175,7 +175,7 @@ void teacherMenu() {
 void courseMenu() {
     int choice;
     do {
-        cout << "\n--- Course Management ---" << endl;
+        cout << "\nCourse Management:" <<endl<< endl;
         cout << "1. Add Course" << endl;
         cout << "2. View All Courses" << endl;
         cout << "3. Enroll Student in Course" << endl;
@@ -275,7 +275,7 @@ void courseMenu() {
 void schedulerMenu() {
     int choice;
     do {
-        cout << "\n--- Scheduling ---" << endl;
+        cout << "\nScheduling:" <<endl<< endl;
         cout << "1. Add Venue" << endl;
         cout << "2. Add Section" << endl;
         cout << "3. Auto Assign Venues" << endl;
@@ -340,7 +340,7 @@ void schedulerMenu() {
 void gradingMenu() {
     int choice;
     do {
-        cout << "\n--- Grading ---" << endl;
+        cout << "\nGrading:" <<endl<< endl;
         cout << "1. Add Assessment to Course" << endl;
         cout << "2. Calculate Final Grade" << endl;
         cout << "3. View Student Transcript" << endl;
