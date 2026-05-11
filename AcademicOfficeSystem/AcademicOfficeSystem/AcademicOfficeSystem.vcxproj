@@ -128,6 +128,7 @@
     <ClCompile Include="..\..\src\DatabaseManager.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Course.cpp" />
+    <ClCompile Include="..\..\src\Scheduler.cpp" />
     <ClCompile Include="..\..\src\Section.cpp" />
     <ClCompile Include="..\..\src\Student.cpp" />
     <ClCompile Include="..\..\src\Teacher.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="..\..\include\Assessment.h" />
     <ClInclude Include="..\..\include\Course.h" />
     <ClInclude Include="..\..\include\DatabaseManager.h" />
+    <ClInclude Include="..\..\include\Scheduler.h" />
     <ClInclude Include="..\..\include\Section.h" />
     <ClInclude Include="..\..\include\Student.h" />
     <ClInclude Include="..\..\include\Teacher.h" />

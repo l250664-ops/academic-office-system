@@ -1,41 +1,64 @@
 #include "../include/AcademicEntity.h"
 #include "../include/Student.h"
 #include "../include/Teacher.h"
-#include "../include/Assessment.h"
 #include "../include/Course.h"
+#include "../include/Assessment.h"
 #include "../include/Venue.h"
 #include "../include/Section.h"
+#include "../include/DatabaseManager.h"
+#include "../include/Scheduler.h"
 #include <iostream>
 using namespace std;
 
+Student* students[50];
+Teacher* teachers[20];
+Course* courses[20];
+Venue* venues[20];
+Section* sections[50];
+int studentCount = 0, teacherCount = 0, courseCount = 0;
+int venueCount = 0, sectionCount = 0;
+
+DatabaseManager db;
+
+void showMainMenu() {
+    cout << "\n============================" << endl;
+    cout << "  Academic Office System" << endl;
+    cout << "============================" << endl;
+    cout << "1. Student Management" << endl;
+    cout << "2. Teacher Management" << endl;
+    cout << "3. Course Management" << endl;
+    cout << "4. Scheduling" << endl;
+    cout << "5. Grading" << endl;
+    cout << "6. Exit" << endl;
+    cout << "============================" << endl;
+    cout << "Enter choice: ";
+}
+
 int main() {
-    // Test Students
-    RegularStudent s1("S001", "Fatima", "fatima@uni.edu", 3.5);
-    s1.displayProfile();
+   
+    db.loadStudents(students, studentCount);
+    db.loadTeachers(teachers, teacherCount);
+    db.loadCourses(courses, courseCount);
+    db.loadVenues(venues, venueCount);
+    db.loadSections(sections, sectionCount);
 
-    ScholarshipStudent s2("S002", "Ali", "ali@uni.edu", 2.0, 2.5);
-    s2.displayProfile();
+    cout << "Data loaded successfully." << endl;
 
-    ExchangeStudent s3("S003", "Sara", "sara@uni.edu", 75.0);
-    s3.evaluate();
-    s3.displayProfile();
+    int choice;
+    do {
+        showMainMenu();
+        cin >> choice;
 
-    // Test Teacher
-    Teacher t1("T001", "Dr. Ahmed", "ahmed@uni.edu");
-    t1.addFeedback(4.5, "Great teacher!");
-    t1.displayProfile();
-
-    // Test Course
-    CoreCourse c1("CS101", "Programming", "T001");
-    c1.displayInfo();
-
-    // Test Venue
-    Venue v1("R101", 50, true);
-    v1.displayVenueInfo();
-
-    // Test Section
-    Section sec1("SEC001", "CS101", "T001", "R101", "Monday 9AM");
-    sec1.displayInfo();
+        switch (choice) {
+        case 1: cout << "Student Management - Coming soon" << endl; break;
+        case 2: cout << "Teacher Management - Coming soon" << endl; break;
+        case 3: cout << "Course Management - Coming soon" << endl; break;
+        case 4: cout << "Scheduling - Coming soon" << endl; break;
+        case 5: cout << "Grading - Coming soon" << endl; break;
+        case 6: cout << "Goodbye!" << endl; break;
+        default: cout << "Invalid choice. Try again." << endl;
+        }
+    } while (choice != 6);
 
     return 0;
 }
