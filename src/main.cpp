@@ -272,6 +272,71 @@ void courseMenu() {
     } while (choice != 5);
 }
 
+void schedulerMenu() {
+    int choice;
+    do {
+        cout << "\n--- Scheduling ---" << endl;
+        cout << "1. Add Venue" << endl;
+        cout << "2. Add Section" << endl;
+        cout << "3. Auto Assign Venues" << endl;
+        cout << "4. View Schedule" << endl;
+        cout << "5. Save Schedule to File" << endl;
+        cout << "6. Back to Main Menu" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            string id;
+            int cap;
+            int comp;
+            cout << "Enter Room ID: "; cin >> id;
+            cout << "Enter Capacity: "; cin >> cap;
+            cout << "Has Computers? (1=Yes 0=No): "; cin >> comp;
+            venues[venueCount] = new Venue(id, cap, comp);
+            db.saveVenue(venues[venueCount]);
+            venueCount++;
+            cout << "Venue added successfully!" << endl;
+
+        }
+        else if (choice == 2) {
+            string sid, cid, tid, vid, slot;
+            cout << "Enter Section ID: "; cin >> sid;
+            cout << "Enter Course ID: "; cin >> cid;
+            cout << "Enter Teacher ID: "; cin >> tid;
+            cout << "Enter Venue ID: "; cin >> vid;
+            cout << "Enter Time Slot: "; cin.ignore(); getline(cin, slot);
+            sections[sectionCount] = new Section(sid, cid, tid, vid, slot);
+            db.saveSection(sections[sectionCount]);
+            sectionCount++;
+            cout << "Section added successfully!" << endl;
+
+        }
+        else if (choice == 3) {
+            Scheduler scheduler;
+            for (int i = 0; i < sectionCount; i++)
+                scheduler.addSection(sections[i]);
+            for (int i = 0; i < venueCount; i++)
+                scheduler.addVenue(venues[i]);
+            scheduler.assignVenues();
+            cout << "Venues assigned successfully!" << endl;
+
+        }
+        else if (choice == 4) {
+            Scheduler scheduler;
+            for (int i = 0; i < sectionCount; i++)
+                scheduler.addSection(sections[i]);
+            scheduler.displaySchedule();
+
+        }
+        else if (choice == 5) {
+            Scheduler scheduler;
+            for (int i = 0; i < sectionCount; i++)
+                scheduler.addSection(sections[i]);
+            scheduler.saveSchedule("schedule.txt");
+        }
+    } while (choice != 6);
+}
+
 int main() {
    
     db.loadStudents(students, studentCount);
@@ -294,7 +359,8 @@ int main() {
             break;
         case 3: courseMenu(); 
             break;
-        case 4: cout << "Scheduling - Coming soon" << endl; break;
+        case 4: schedulerMenu(); 
+            break;
         case 5: cout << "Grading - Coming soon" << endl; break;
         case 6: cout << "Goodbye!" << endl; break;
         default: cout << "Invalid choice. Try again." << endl;
