@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\AcademicEntity.cpp" />
     <ClCompile Include="..\..\src\Assessment.cpp" />
+    <ClCompile Include="..\..\src\DatabaseManager.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Course.cpp" />
     <ClCompile Include="..\..\src\Section.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="..\..\include\AcademicEntity.h" />
     <ClInclude Include="..\..\include\Assessment.h" />
     <ClInclude Include="..\..\include\Course.h" />
+    <ClInclude Include="..\..\include\DatabaseManager.h" />
     <ClInclude Include="..\..\include\Section.h" />
     <ClInclude Include="..\..\include\Student.h" />
     <ClInclude Include="..\..\include\Teacher.h" />
