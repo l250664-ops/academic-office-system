@@ -172,6 +172,106 @@ void teacherMenu() {
     } while (choice != 5);
 }
 
+void courseMenu() {
+    int choice;
+    do {
+        cout << "\n--- Course Management ---" << endl;
+        cout << "1. Add Course" << endl;
+        cout << "2. View All Courses" << endl;
+        cout << "3. Enroll Student in Course" << endl;
+        cout << "4. View Enrolled Students" << endl;
+        cout << "5. Back to Main Menu" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            string id, title, tid, type;
+            cout << "Enter Course ID: "; cin >> id;
+            cin.ignore();
+            cout << "Enter Title: "; getline(cin, title);
+            cout << "Enter Teacher ID: "; cin >> tid;
+            cout << "Enter Type (Core/Elective/Lab): "; cin >> type;
+
+            if (type == "Core")
+                courses[courseCount] = new CoreCourse(id, title, tid);
+            else if (type == "Elective")
+                courses[courseCount] = new ElectiveCourse(id, title, tid);
+            else if (type == "Lab")
+                courses[courseCount] = new LabCourse(id, title, tid);
+            else {
+                cout << "Invalid type!" << endl;
+                continue;
+            }
+            db.saveCourse(courses[courseCount]);
+            courseCount++;
+            cout << "Course added successfully!" << endl;
+
+        }
+        else if (choice == 2) {
+            if (courseCount == 0) {
+                cout << "No courses found." << endl;
+            }
+            else {
+                for (int i = 0; i < courseCount; i++) {
+                    courses[i]->displayInfo();
+                }
+            }
+        }
+        else if (choice == 3) {
+            string sid, cid;
+            cout << "Enter Student ID: "; cin >> sid;
+            cout << "Enter Course ID: "; cin >> cid;
+            bool found = false;
+            for (int i = 0; i < courseCount; i++) {
+                if (courses[i]->getCourseID() == cid) {
+                    if (courses[i]->isFull()) {
+                        cout << "Course is full!" << endl;
+                    }
+                    else if (courses[i]->isStudentEnrolled(sid)) {
+                        cout << "Student already enrolled!" << endl;
+                    }
+                    else {
+                        courses[i]->enrollStudent(sid);
+                        // Also enroll in student object
+                        for (int j = 0; j < studentCount; j++) {
+                            if (students[j]->getID() == sid) {
+                                students[j]->enrollCourse(cid);
+                                break;
+                            }
+                        }
+                        cout << "Student enrolled successfully!" << endl;
+                    }
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) cout << "Course not found." << endl;
+
+        }
+        else if (choice == 4) {
+            string cid;
+            cout << "Enter Course ID: "; cin >> cid;
+            bool found = false;
+            for (int i = 0; i < courseCount; i++) {
+                if (courses[i]->getCourseID() == cid) {
+                    cout << "Enrolled Students in " << courses[i]->getTitle() << ":" << endl;
+                    if (courses[i]->getStudentCount() == 0) {
+                        cout << "No students enrolled." << endl;
+                    }
+                    else {
+                        for (int j = 0; j < courses[i]->getStudentCount(); j++) {
+                            cout << "  " << j + 1 << ". " << courses[i]->getEnrolledStudentID(j) << endl;
+                        }
+                    }
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) cout << "Course not found." << endl;
+        }
+    } while (choice != 5);
+}
+
 int main() {
    
     db.loadStudents(students, studentCount);
@@ -192,7 +292,8 @@ int main() {
             break;
         case 2: teacherMenu();
             break;
-        case 3: cout << "Course Management - Coming soon" << endl; break;
+        case 3: courseMenu(); 
+            break;
         case 4: cout << "Scheduling - Coming soon" << endl; break;
         case 5: cout << "Grading - Coming soon" << endl; break;
         case 6: cout << "Goodbye!" << endl; break;
