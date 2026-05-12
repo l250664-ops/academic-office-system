@@ -373,7 +373,7 @@ void gradingMenu() {
                         break;
                     }
                     courses[i]->addAssessment(a);
-
+                    db.saveAssessment(cid, type, raw, max);
                     float grade = courses[i]->calculateFinalGrade();
                     for (int j = 0; j < studentCount; j++) {
                         if (students[j]->getID() == sid) {

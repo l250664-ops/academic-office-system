@@ -18,7 +18,7 @@ private:
 
 public:
     DatabaseManager();
-
+    
     void saveStudent(Student* s);
     void loadStudents(Student* students[], int& count);
 
@@ -33,4 +33,7 @@ public:
 
     void saveSection(Section* s);
     void loadSections(Section* sections[], int& count);
+
+    void saveAssessment(string sectionID, string type, float rawScore, float maxScore);
+    void loadAssessments(string filename);
 };

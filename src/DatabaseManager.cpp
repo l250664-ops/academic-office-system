@@ -195,3 +195,11 @@ void DatabaseManager::loadCourses(Course* courses[], int& count) {
     }
     file.close();
 }
+
+// ----Assessment----
+void DatabaseManager::saveAssessment(string sectionID, string type, float rawScore, float maxScore) {
+    ofstream file("assessments.txt", ios::app);
+    if (!file) { cout << "Error opening assessments file." << endl; return; }
+    file << sectionID << " | " << type << " | " << rawScore << " | " << maxScore << endl;
+    file.close();
+}
