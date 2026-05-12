@@ -2,3 +2,9 @@ CS101 | Exam | 80 | 100
 CS101 | Quiz | 90 | 100
 CS101 | Assignment | 20 | 30
 CS102 | Exam | 80 | 100
+CS101 | Exam | 10 | 10
+CS101 | Quiz | 10 | 10
+CS101 | Assignment | 10 | 10
+CS101 | Exam | 10 | 10
+CS101 | Quiz | 10 | 10
+CS101 | Assignment | 10 | 10

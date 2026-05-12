@@ -393,12 +393,17 @@ void gradingMenu() {
                             students[j]->addGrade(cid, grade);
 
                             // Auto calculate and update GPA
-                            float totalGrade = 0;
+                            // Sum grades per course, then average across courses
+                            float totalCourseGrades = 0;
+                            int uniqueCourses = 0;
                             for (int k = 0; k < students[j]->getGradeCount(); k++) {
-                                totalGrade += students[j]->getGradeScore(k);
+                                // Each addGrade call is per assessment, accumulate per course
+                                totalCourseGrades += students[j]->getGradeScore(k);
                             }
-                            float newGPA = (totalGrade / students[j]->getGradeCount()) / 25.0;
-
+                            // Get final grade for this course (all assessments combined)
+                            float courseTotal = courses[i]->calculateFinalGrade();
+                            // Convert to GPA scale (100% = 4.0)
+                            float newGPA = (courseTotal / 100.0) * 4.0;
                             // Update GPA based on student type
                             RegularStudent* rs = dynamic_cast<RegularStudent*>(students[j]);
                             if (rs) rs->setGPA(newGPA);
