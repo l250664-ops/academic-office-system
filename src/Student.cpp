@@ -3,8 +3,7 @@
 #include <iostream>
 using namespace std;
 
-Student::Student(string id, string n, string e)
-    : AcademicEntity(id, n, e), courseCount(0) {
+Student::Student(string id, string n, string e) : AcademicEntity(id, n, e), courseCount(0), gradeCount(0) {
 }
 
 void Student::enrollCourse(string courseID) {
@@ -33,6 +32,14 @@ int Student::getCourseCount() const {
 
 string Student::getEnrolledCourse(int index) const {
     return enrolledCourses[index];
+}
+
+void Student::addGrade(string courseID, float score) {
+    if (gradeCount < 20) {
+        gradeCourseIDs[gradeCount] = courseID;
+        gradeScores[gradeCount] = score;
+        gradeCount++;
+    }
 }
 
 RegularStudent::RegularStudent(string id, string n, string e, float g) : Student(id, n, e), gpa(g) {
