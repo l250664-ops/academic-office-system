@@ -1,1 +1,3 @@
 CS101 | OOP | T001 | Core
+CS102 | PF | T002 | Elective
+CS103 | DLD | T003 | Lab

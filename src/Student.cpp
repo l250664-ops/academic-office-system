@@ -164,3 +164,11 @@ void ExchangeStudent::displayProfile() const {
 string ExchangeStudent::getStudentType() const {
     return "Exchange";
 }
+
+int Student::getGradeCount() const {
+    return gradeCount;
+}
+
+float Student::getGradeScore(int index) const {
+    return gradeScores[index];
+}

@@ -1,1 +1,6 @@
 CS101 | Quiz | 12 | 15
+CS101 | Exam | 12 | 15
+CS102 | Quiz | 10 | 10
+CS102 | Assignment | 20 | 20
+CS102 | Exam | 10 | 10
+CS102 | Quiz | 10 | 10

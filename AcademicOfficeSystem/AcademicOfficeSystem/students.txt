@@ -1,1 +1,5 @@
 S001 | Fatima | Regular | 3.5
+S002 | Meerab | Scholarship | 3
+S003 | Azeen | Regular | 3.4
+S004 | Alisha | Scholarship | 2.5
+S005 | Amna | Exchange | 0

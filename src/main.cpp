@@ -378,9 +378,24 @@ void gradingMenu() {
                     for (int j = 0; j < studentCount; j++) {
                         if (students[j]->getID() == sid) {
                             students[j]->addGrade(cid, grade);
+
+                            // Auto calculate and update GPA
+                            float totalGrade = 0;
+                            for (int k = 0; k < students[j]->getGradeCount(); k++) {
+                                totalGrade += students[j]->getGradeScore(k);
+                            }
+                            float newGPA = (totalGrade / students[j]->getGradeCount()) / 25.0;
+
+                            // Update GPA based on student type
+                            RegularStudent* rs = dynamic_cast<RegularStudent*>(students[j]);
+                            if (rs) rs->setGPA(newGPA);
+
+                            ScholarshipStudent* ss = dynamic_cast<ScholarshipStudent*>(students[j]);
+                            if (ss) ss->setGPA(newGPA);
+
                             cout << "\n*** BIG RED BUTTON ***" << endl;
-                            cout << "Assessment added! Auto-calculated grade: "
-                                << grade << "%" << endl;
+                            cout << "Assessment added! Auto-calculated grade: " << grade << "%" << endl;
+                            cout << "GPA automatically updated to: " << newGPA << endl;
                             break;
                         }
                     }

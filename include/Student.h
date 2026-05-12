@@ -24,7 +24,8 @@ public:
     virtual void viewTranscript() const = 0;
     virtual string getStudentType() const = 0;
     void addGrade(string courseID, float score);
-    
+    int getGradeCount() const;
+    float getGradeScore(int index) const;
 
     virtual ~Student() {}
 };
@@ -78,4 +79,6 @@ public:
 
     string getResult() const;
     void setScore(float s);
+
+    
 };
