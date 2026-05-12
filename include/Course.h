@@ -43,6 +43,10 @@ public:
     virtual int getExamDuration() const = 0;
     virtual void displayInfo() const = 0;
 
+    float getExamWeightage() const;
+    float getAssignmentWeightage() const;
+    float getQuizWeightage() const;
+
     virtual ~Course();
 };
 

@@ -1,3 +1,1 @@
-T001 | Usama | usama@nu.edu | 0
-T002 | Ali | ali@nu.edu | 0
-T003 | Umar | umar@nu.edu | 0
+T001 | Ahmad | ahmad@uni.edu | 0

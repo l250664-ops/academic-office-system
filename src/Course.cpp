@@ -172,3 +172,13 @@ void LabCourse::displayInfo() const {
     cout << "Duration : No final exam" << endl;
     cout << "Students : " << studentCount << endl;
 }
+
+float Course::getExamWeightage() const {
+    return examWeightage; 
+}
+float Course::getAssignmentWeightage() const {
+    return assignmentWeightage; 
+}
+float Course::getQuizWeightage() const { 
+    return quizWeightage; 
+}

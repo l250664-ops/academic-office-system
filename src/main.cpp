@@ -356,8 +356,21 @@ void gradingMenu() {
             cout << "Enter Assessment Type (Exam/Quiz/Assignment): "; cin >> type;
             cout << "Enter Raw Score: "; cin >> raw;
             cout << "Enter Max Score: "; cin >> max;
-            cout << "Enter Weightage: "; cin >> weightage;
 
+            // Auto get weightage from course type
+            weightage = 0;
+            for (int i = 0; i < courseCount; i++) {
+                if (courses[i]->getCourseID() == cid) {
+                    if (type == "Exam")
+                        weightage = courses[i]->getExamWeightage();
+                    else if (type == "Assignment")
+                        weightage = courses[i]->getAssignmentWeightage();
+                    else if (type == "Quiz")
+                        weightage = courses[i]->getQuizWeightage();
+                    break;
+                }
+            }
+            cout << "Weightage automatically set to: " << weightage << "%" << endl;
             bool courseFound = false;
             for (int i = 0; i < courseCount; i++) {
                 if (courses[i]->getCourseID() == cid) {
