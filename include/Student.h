@@ -9,10 +9,12 @@ class Student : public AcademicEntity {
 protected:
     string enrolledCourses[10];
     int courseCount;
-
+    string gradeCourseIDs[20];
+    float gradeScores[20];
+    int gradeCount;
 public:
     Student(string id, string n, string e);
-
+   
     void enrollCourse(string courseID);
     void listEnrolledCourses() const;
     int getCourseCount() const;
@@ -21,6 +23,8 @@ public:
     virtual float calculateGPA() const = 0;
     virtual void viewTranscript() const = 0;
     virtual string getStudentType() const = 0;
+    void addGrade(string courseID, float score);
+    
 
     virtual ~Student() {}
 };

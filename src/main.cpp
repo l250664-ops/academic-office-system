@@ -340,24 +340,25 @@ void schedulerMenu() {
 void gradingMenu() {
     int choice;
     do {
-        cout << "\nGrading:" <<endl<< endl;
+        cout << "\nGrading:" << endl;
         cout << "1. Add Assessment to Course" << endl;
-        cout << "2. Calculate Final Grade" << endl;
+        cout << "2. Calculate Final Grade for Student" << endl;
         cout << "3. View Student Transcript" << endl;
         cout << "4. Back to Main Menu" << endl;
         cout << "Enter choice: ";
         cin >> choice;
 
         if (choice == 1) {
-            string cid, type;
+            string cid, sid, type;
             float raw, max, weightage;
             cout << "Enter Course ID: "; cin >> cid;
+            cout << "Enter Student ID: "; cin >> sid;
             cout << "Enter Assessment Type (Exam/Quiz/Assignment): "; cin >> type;
             cout << "Enter Raw Score: "; cin >> raw;
             cout << "Enter Max Score: "; cin >> max;
             cout << "Enter Weightage: "; cin >> weightage;
 
-            bool found = false;
+            bool courseFound = false;
             for (int i = 0; i < courseCount; i++) {
                 if (courses[i]->getCourseID() == cid) {
                     Assessment* a = nullptr;
@@ -372,28 +373,44 @@ void gradingMenu() {
                         break;
                     }
                     courses[i]->addAssessment(a);
-                    cout << "Assessment added successfully!" << endl;
-                    found = true;
+
+                    float grade = courses[i]->calculateFinalGrade();
+                    for (int j = 0; j < studentCount; j++) {
+                        if (students[j]->getID() == sid) {
+                            students[j]->addGrade(cid, grade);
+                            cout << "\n*** BIG RED BUTTON ***" << endl;
+                            cout << "Assessment added! Auto-calculated grade: "
+                                << grade << "%" << endl;
+                            break;
+                        }
+                    }
+                    courseFound = true;
                     break;
                 }
             }
-            if (!found) cout << "Course not found." << endl;
+            if (!courseFound) cout << "Course not found." << endl;
 
         }
         else if (choice == 2) {
-            string cid;
+            string sid, cid;
+            cout << "Enter Student ID: "; cin >> sid;
             cout << "Enter Course ID: "; cin >> cid;
-            bool found = false;
             for (int i = 0; i < courseCount; i++) {
                 if (courses[i]->getCourseID() == cid) {
                     float grade = courses[i]->calculateFinalGrade();
-                    cout << "Final Grade for " << courses[i]->getTitle()
-                        << ": " << grade << "%" << endl;
-                    found = true;
+                    
+                    for (int j = 0; j < studentCount; j++) {
+                        if (students[j]->getID() == sid) {
+                            students[j]->addGrade(cid, grade);
+                            cout << "Final Grade for " << students[j]->getName()
+                                << " in " << courses[i]->getTitle()
+                                << ": " << grade << "%" << endl;
+                            break;
+                        }
+                    }
                     break;
                 }
             }
-            if (!found) cout << "Course not found." << endl;
 
         }
         else if (choice == 3) {
@@ -411,7 +428,6 @@ void gradingMenu() {
         }
     } while (choice != 4);
 }
-
 int main() {
    
     db.loadStudents(students, studentCount);
