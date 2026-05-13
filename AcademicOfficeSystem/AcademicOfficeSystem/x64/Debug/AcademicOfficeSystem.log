@@ -1,3 +1,5 @@
-﻿  main.cpp
+﻿  Scheduler.cpp
+  main.cpp
 C:\Users\Admin\OneDrive\Desktop\academic-office-system\src\main.cpp(406,42): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   AcademicOfficeSystem.vcxproj -> C:\Users\Admin\OneDrive\Desktop\academic-office-system\AcademicOfficeSystem\x64\Debug\AcademicOfficeSystem.exe

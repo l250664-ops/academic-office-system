@@ -23,16 +23,16 @@ string Course::getCourseType() const {
     return courseType;
 }
 int Course::getStudentCount() const {
-    return studentCount;
+    return studentCount;//total enrolled students
 }
 
 string Course::getEnrolledStudentID(int index) const {
-    return enrolledStudentIDs[index];
+    return enrolledStudentIDs[index];//enrolled student atgiven index
 }
 
 void Course::enrollStudent(string studentID) {
     if (studentCount < 50) {
-        enrolledStudentIDs[studentCount] = studentID;
+        enrolledStudentIDs[studentCount] = studentID;//store id of enrolled stud
         studentCount++;
     }
     else {
@@ -40,6 +40,7 @@ void Course::enrollStudent(string studentID) {
     }
 }
 
+//checks if student is enrolled
 bool Course::isStudentEnrolled(string studentID) const {
     for (int i = 0; i < studentCount; i++) {
         if (enrolledStudentIDs[i] == studentID)
@@ -48,22 +49,25 @@ bool Course::isStudentEnrolled(string studentID) const {
     return false;
 }
 
-bool Course::isFull() const { return studentCount >= 50; }
+bool Course::isFull() const {
+    return studentCount >= 50;//if course full
+}
 
 void Course::addAssessment(Assessment* a) {
     if (assessmentCount < 10) {
-        assessments[assessmentCount] = a;
-        assessmentCount++;
+        assessments[assessmentCount] = a;//store assessment
+        assessmentCount++;//total assessment
     }
 }
 
+//load weigyhtages from weightages.txt
 void Course::loadWeightages(string filename) {
     ifstream file(filename);
     if (!file) {
         cout << "Warning: weightages.txt not found. Using defaults." << endl;
         return;
     }
-
+    //read line by line
     string line;
     while (getline(file, line)) {
         stringstream ss(line);
@@ -73,10 +77,15 @@ void Course::loadWeightages(string filename) {
 
         getline(ss, type, '|');
         ss >> exam >> delim >> assignment >> delim >> quiz;
+        //exam | assignment | quiz
 
-        while (!type.empty() && type[0] == ' ') type = type.substr(1);
-        while (!type.empty() && type.back() == ' ') type.pop_back();
+        while (!type.empty() && type[0] == ' ')
+            type = type.substr(1);// removes spaces from start
+        while (!type.empty() && type.back() == ' ')
+            type.pop_back();// remove spaces from end
 
+
+        //match cousre typr
         if (type == courseType) {
             examWeightage = exam;
             assignmentWeightage = assignment;
@@ -101,12 +110,14 @@ CoreCourse::CoreCourse(string id, string t, string tid)
 float CoreCourse::calculateFinalGrade() const {
     float total = 0;
     for (int i = 0; i < assessmentCount; i++) {
-        total += assessments[i]->calculateScore();
+        total += assessments[i]->calculateScore();//add all assessment scoreS
     }
     return total;
 }
 
-int CoreCourse::getExamDuration() const { return 3; }
+int CoreCourse::getExamDuration() const {
+    return 3; 
+}
 
 void CoreCourse::displayInfo() const {
     cout << "\n--- Core Course ---" << endl;
@@ -125,6 +136,7 @@ ElectiveCourse::ElectiveCourse(string id, string t, string tid)
     loadWeightages("weightages.txt");
 }
 
+// Calculates final grade
 float ElectiveCourse::calculateFinalGrade() const {
     float total = 0;
     for (int i = 0; i < assessmentCount; i++) {
@@ -133,7 +145,9 @@ float ElectiveCourse::calculateFinalGrade() const {
     return total;
 }
 
-int ElectiveCourse::getExamDuration() const { return 2; }
+int ElectiveCourse::getExamDuration() const { 
+    return 2; 
+}
 
 void ElectiveCourse::displayInfo() const {
     cout << "\n--- Elective Course ---" << endl;
@@ -151,7 +165,7 @@ LabCourse::LabCourse(string id, string t, string tid)
     : Course(id, t, tid, "Lab") {
     loadWeightages("weightages.txt");
 }
-
+// Calculates final grade
 float LabCourse::calculateFinalGrade() const {
     float total = 0;
     for (int i = 0; i < assessmentCount; i++) {
